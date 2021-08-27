@@ -1,0 +1,150 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/caixote_madeira.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/caixote_metal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/barricada.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/arvore.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/oleo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/barrilPreto.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/torreta.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tilesets/cenario.tres" type="TileSet" id=9]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=11]
+[ext_resource path="res://Fonts/Zone99heavy.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://scenes/radar2.tscn" type="PackedScene" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 12 )
+
+[node name="areaTeste" type="Node"]
+
+[node name="Tank" parent="." instance=ExtResource( 1 )]
+position = Vector2( 430.268, 65.6394 )
+tank_sprite = 3
+
+[node name="Camera2D" type="Camera2D" parent="Tank"]
+position = Vector2( -2.11896, 0 )
+current = true
+limit_left = 0
+limit_top = 0
+smoothing_enabled = true
+script = ExtResource( 10 )
+
+[node name="caixote_madeira" parent="." instance=ExtResource( 2 )]
+position = Vector2( 946.709, 450.999 )
+
+[node name="barricada" parent="." instance=ExtResource( 4 )]
+position = Vector2( 12.3697, 46.0878 )
+
+[node name="barricada2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 12.3697, 81.3656 )
+
+[node name="barricada3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 41.9778, 64.9866 )
+
+[node name="barricada4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 553.923, 14.0749 )
+
+[node name="barricada5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 588.158, 15.7586 )
+
+[node name="barricada7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1306.16, 681.759 )
+
+[node name="barricada8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1324.16, 719.759 )
+
+[node name="barricada9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1348.16, 701.759 )
+
+[node name="barricada6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 278.964, 427.224 )
+
+[node name="arvore" parent="." instance=ExtResource( 5 )]
+position = Vector2( 458.359, 156.281 )
+
+[node name="arvore2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 476.177, 229.335 )
+
+[node name="arvore3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1067.14, 193.699 )
+
+[node name="oleo" parent="." instance=ExtResource( 6 )]
+position = Vector2( 795.22, 439.859 )
+
+[node name="oleo2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 819.247, 462.551 )
+
+[node name="oleo3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 833.93, 439.859 )
+
+[node name="caixote_madeira2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 255.843, 64.069 )
+
+[node name="barrilPreto" parent="." instance=ExtResource( 7 )]
+position = Vector2( 545.305, 66.1252 )
+
+[node name="barrilPreto2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 554.743, 368.166 )
+
+[node name="cenario" type="TileMap" parent="."]
+z_index = -5
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 128, 128 )
+collision_layer = 0
+format = 1
+tile_data = PoolIntArray( 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 10, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 18, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 4, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 5, 0, 65546, 11, 0, 65547, 11, 0, 65548, 11, 0, 65549, 11, 0, 65550, 18, 0, 65551, 0, 0, 65552, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 4, 0, 131077, 0, 0, 131078, 0, 0, 131079, 1, 0, 131080, 0, 0, 131081, 4, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 4, 0, 131087, 0, 0, 131088, 0, 0, 196608, 11, 0, 196609, 11, 0, 196610, 11, 0, 196611, 11, 0, 196612, 10, 0, 196613, 11, 0, 196614, 11, 0, 196615, 11, 0, 196616, 11, 0, 196617, 26, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 4, 0, 196623, 0, 0, 196624, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 4, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 4, 0, 262159, 13, 0, 262160, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 12, 0, 327685, 11, 0, 327686, 11, 0, 327687, 11, 0, 327688, 11, 0, 327689, 11, 0, 327690, 11, 0, 327691, 11, 0, 327692, 11, 0, 327693, 11, 0, 327694, 10, 0, 327695, 26, 0, 327696, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 4, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 4, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="torretas" type="Node2D" parent="."]
+
+[node name="torreta" parent="torretas" instance=ExtResource( 8 )]
+position = Vector2( 1307.47, 267.341 )
+rotacao_inicial = 203.684
+sensor_inicial = 250.0
+
+[node name="torreta2" parent="torretas" instance=ExtResource( 8 )]
+position = Vector2( 820.547, 139.042 )
+rotacao_inicial = 146.842
+sensor_inicial = 250.0
+tipo = 1
+
+[node name="torreta3" parent="torretas" instance=ExtResource( 8 )]
+position = Vector2( 482.46, 527.876 )
+rotacao_inicial = 227.369
+sensor_inicial = 250.0
+
+[node name="torreta4" parent="torretas" instance=ExtResource( 8 )]
+position = Vector2( 1766.78, 623.194 )
+rotacao_inicial = 303.289
+sensor_inicial = 250.0
+
+[node name="torreta5" parent="torretas" instance=ExtResource( 8 )]
+position = Vector2( 977.43, 569.087 )
+rotacao_inicial = 161.053
+sensor_inicial = 250.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 11 )
+
+[node name="pontuacao" type="Label" parent="HUD"]
+margin_left = 12.0
+margin_top = 14.0
+margin_right = 99.0
+margin_bottom = 91.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "000
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="radar2" parent="HUD" instance=ExtResource( 13 )]
+tank = Object(KinematicBody2D,"_import_path":NodePath(""),"pause_mode":0,"process_priority":0,"visible":true,"modulate":Color( 1, 1, 1, 1 ),"self_modulate":Color( 1, 1, 1, 1 ),"show_behind_parent":false,"light_mask":1,"material":null,"use_parent_material":false,"position":Vector2( 430.268, 65.6394 ),"rotation":0.0,"scale":Vector2( 1, 1 ),"z_index":3,"z_as_relative":true,"input_pickable":false,"collision_layer":1,"collision_mask":7,"collision/safe_margin":0.08,"motion/sync_to_physics":false,"script":Resource( "res://Scripts/Tank.gd" ),"grupoTiros":"tiros-[KinematicBody2D:304724]","percorrido":0,"carregado":true,"aceleracao":0,"pre_tiro":Resource( "res://scenes/tiro.tscn" ),"pre_caminho":Resource( "res://scenes/caminho.tscn" ),"pre_tiroMetralhadora":Resource( "res://Scripts/tiro_metralha.tscn" ),"tank_sprite":3,"sprites":[ "res://sprites/tankBody_bigRed.png", "res://sprites/tankBody_blue.png", "res://sprites/tankBody_dark.png", "res://sprites/tankBody_darkLarge.png", "res://sprites/tankBody_green.png" ])
+

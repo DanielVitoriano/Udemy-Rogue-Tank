@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/metal_hit.wav-e32217d02395b4f4894aea8982abfb07.sample"
+
+[deps]
+
+source_file="res://SFX/metal_hit.wav"
+dest_files=[ "res://.import/metal_hit.wav-e32217d02395b4f4894aea8982abfb07.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

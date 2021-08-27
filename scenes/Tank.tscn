@@ -1,0 +1,192 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://sprites/tankBody_bigRed.png" type="Texture" id=1]
+[ext_resource path="res://sprites/tankDark_barrel1.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Tank.gd" type="Script" id=3]
+[ext_resource path="res://sprites/shotRed.png" type="Texture" id=4]
+[ext_resource path="res://sprites/shotLarge.png" type="Texture" id=5]
+[ext_resource path="res://sprites/shotOrange.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/mira.gd" type="Script" id=7]
+[ext_resource path="res://sprites/specialBarrel4.png" type="Texture" id=8]
+[ext_resource path="res://SFX/disparo_hmg_tank.wav" type="AudioStream" id=9]
+[ext_resource path="res://SFX/tank_cannon.wav" type="AudioStream" id=10]
+[ext_resource path="res://SFX/reload.wav" type="AudioStream" id=11]
+[ext_resource path="res://SFX/tank_motor.wav" type="AudioStream" id=12]
+[ext_resource path="res://Scripts/destrutivos.gd" type="Script" id=13]
+
+[sub_resource type="Animation" id=1]
+resource_name = "disparo"
+length = 0.35
+step = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("disparo:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("disparo:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 46.3155, 0 ), Vector2( 48.26, 0 ), Vector2( 52.6795, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("disparo:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "recuo"
+length = 0.4
+step = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("tankDark_barrel1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0500225, 0.4 ),
+"transitions": PoolRealArray( 0.757861, 1 ),
+"update": 0,
+"values": [ Vector2( 9.31262, 0 ), Vector2( 18.8535, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=3]
+resource_name = "sons_tank"
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	get_parent().connect(\"disparo_canhao\", self, \"on_tank_cannon_shooted\")
+	get_parent().connect(\"disparo_metralhadora\", self, \"on_tank_hmg_shooted\")
+	$motor.play()
+	pass # Replace with function body.
+
+func on_tank_cannon_shooted():
+	$disparo.play()
+	yield($disparo, \"finished\")
+	$recarga.play()
+
+func on_tank_hmg_shooted():
+	$hmg.play()
+	
+
+func _physics_process(_delta):
+	var pitch = abs( get_parent().aceleracao / get_parent().max_velocidade)
+	$motor.pitch_scale = pitch + .7
+"
+
+[node name="Tank" type="KinematicBody2D" groups=[
+"jogador",
+]]
+z_index = 3
+collision_mask = 7
+script = ExtResource( 3 )
+
+[node name="poly" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.282671, 0 )
+scale = Vector2( 0.990718, 1 )
+polygon = PoolVector2Array( -12.5694, -16.9283, -19.1032, -12.6206, -18.7286, 15.8472, -13.2972, 18.8438, 12.5486, 18.4692, 18.3545, 15.2853, 18.7291, -14.8681, 12.3843, -16.9283 )
+
+[node name="sprite" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 1 )
+
+[node name="metralhadora" type="Sprite" parent="."]
+position = Vector2( 21.7695, 11.9927 )
+rotation = -1.5708
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 8 )
+
+[node name="Position2D" type="Position2D" parent="metralhadora"]
+position = Vector2( -1.79247, 26.0363 )
+
+[node name="time_metralha" type="Timer" parent="metralhadora"]
+process_mode = 0
+wait_time = 0.1
+
+[node name="canhao" type="Node2D" parent="."]
+position = Vector2( 8.13785, 0 )
+
+[node name="tankDark_barrel1" type="Sprite" parent="canhao"]
+position = Vector2( 18.8535, 0 )
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="pos_tiro" type="Position2D" parent="canhao"]
+position = Vector2( 40, 0 )
+rotation = -1.5708
+
+[node name="disparo" type="Sprite" parent="canhao"]
+visible = false
+position = Vector2( 46.3155, 0 )
+rotation = -1.5708
+z_index = 3
+texture = ExtResource( 5 )
+
+[node name="anim" type="AnimationPlayer" parent="canhao"]
+playback_speed = 2.0
+anims/disparo = SubResource( 1 )
+
+[node name="mira" type="Node2D" parent="canhao"]
+position = Vector2( 198.884, 0 )
+script = ExtResource( 7 )
+
+[node name="canha_atirando" type="AnimationPlayer" parent="canhao"]
+anims/recuo = SubResource( 2 )
+
+[node name="recarregar" type="Timer" parent="."]
+one_shot = true
+
+[node name="sons" type="Node" parent="."]
+script = SubResource( 3 )
+
+[node name="disparo" type="AudioStreamPlayer" parent="sons"]
+stream = ExtResource( 10 )
+bus = "fx"
+
+[node name="hmg" type="AudioStreamPlayer" parent="sons"]
+stream = ExtResource( 9 )
+bus = "fx"
+
+[node name="recarga" type="AudioStreamPlayer" parent="sons"]
+stream = ExtResource( 11 )
+
+[node name="motor" type="AudioStreamPlayer" parent="sons"]
+stream = ExtResource( 12 )
+bus = "fx"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 13 )
+vida = 100
+
+[node name="area" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -24.1574, -10.8867, -22.0972, -20.813, -18.3515, -23.435, -2.80653, -23.9969, 18.7316, -19.6892, 23.4138, -12.0104, 23.7884, 11.4006, 14.6113, 22.0761, -1.87009, 21.7015, -18.1642, 23.7617, -22.2845, 16.832, -24.1574, 8.7786, -19.6625, 8.59131, -20.0371, -8.26464 )
+
+[connection signal="timeout" from="metralhadora/time_metralha" to="." method="_on_time_metralha_timeout"]
+[connection signal="timeout" from="recarregar" to="." method="_on_recarregar_timeout"]
+[connection signal="destruido" from="Area2D" to="." method="_on_Area2D_destruido"]
